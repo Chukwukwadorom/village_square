@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if title %}
+    <title> {{title}} - Village square  </title>
+    {% else %}
+    <title> Welcome to Village square!  </title>
+    {% endif %}
+</head>
+<body>
+    <div> Village square: <a href="index.html">home</a></div>
+    <hr>
+  {% block  content %}
+  {% endblock %}
+
+</body>
+</html>
