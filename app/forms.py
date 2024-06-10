@@ -7,3 +7,11 @@ class LoginForm(FlaskForm):
     password = PasswordField("Password",validators=[DataRequired()])
     remember_me = BooleanField("Remember Me")
     submit = SubmitField("Sign In")
+
+
+if __name__ == "__main__":
+    import os
+    print(__name__)
+    print(__file__)
+    print(os.path.dirname(__file__))
+    print(os.path.abspath(os.path.dirname(__file__)))
