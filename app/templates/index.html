@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block my_content %}
-    <h1>Hello {{user.username}}!</h1>
+    <h1>Hello {{current_user.username}}!</h1>
 
     {% for post in posts %}
 
-    <div> <p> {{post.author.username}} shared:<b>{{post.body}}</b> </p></div>
+    <div> <p> {{post.username}} shared:<b>{{post.body}}</b> </p></div>
     {% endfor %}
 
 {% endblock %}
