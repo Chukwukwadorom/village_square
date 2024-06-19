@@ -5,6 +5,8 @@ import sqlalchemy.orm as sa_o
 from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from hashlib import md5
+
 
 
 
@@ -35,6 +37,9 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(128), index=True, unique=True)
     password_hash = db.Column(db.String(256))
+    about_me = db.Column(db.String(140), nullable=True)
+    last_seen = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+
 
     posts = db.relationship('Post', back_populates='author')
 
@@ -46,6 +51,12 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    def avatar(self, size):
+        email_hash = md5(self.email.lower().encode('utf-8')).hexdigest()
+        url = f"https://www.gravatar.com/avatar/{email_hash}?d=identicon&s={size}"
+        return url
+
 
 
 class Post(db.Model):
